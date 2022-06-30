@@ -9,7 +9,7 @@ import pandas as pd
 
 WAITING_TIME = 10 # seconds
 PAGE_SIZE = 200
-NUM_PAGES = 10
+NUM_PAGES = 20
 BASE_URL = "https://mayors24.cityofboston.gov/open311/v2/requests.json" + "?page_size=" + str(PAGE_SIZE)
 
 # First Page
@@ -20,9 +20,9 @@ grievances = [issue['description'] for issue in data if 'description' in issue]
 
 # Subsequent Pages so that NUM_PAGES is the number of pages to be scraped
 
-for i in range(NUM_PAGES):
+for i in range(1, NUM_PAGES):
     time.sleep(WAITING_TIME)
-    new_url = BASE_URL + "&page_increment=" + str(i)
+    new_url = BASE_URL + "&page=" + str(i)
     additional_data = requests.get(new_url).json()
     for issue in additional_data:
         if 'description' in issue.keys(): # if the issue has no description, this is when it is only an image
