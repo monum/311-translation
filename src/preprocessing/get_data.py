@@ -33,5 +33,6 @@ for i in range(1, NUM_PAGES):
 
 # Storing the data in a CSV format
 
-df = pd.DataFrame(list(zip(service_ids, grievances)), columns=['service_request_id', 'grievance'])
-df.to_csv('../../data/grievances.csv')
+with open('../../data/grievances.csv', 'w') as f:
+    df = pd.DataFrame(list(zip(service_ids, grievances)), columns=['service_request_id', 'grievance'])
+    df.to_csv(f, index=False)
